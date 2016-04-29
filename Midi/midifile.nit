@@ -124,7 +124,7 @@ class MidiFile
 end
 
 if args.is_empty then
-	print "Usage: ./midifile file"
+	print "Usage: ./midiparser file"
 	exit(1)
 end
 

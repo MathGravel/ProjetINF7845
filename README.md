@@ -19,6 +19,18 @@ Inspiré des sites des références :
  - [CSIE](https://www.csie.ntu.edu.tw/~r92092/ref/midi/)
  - [Université Stanford](http://www.ccarh.org/courses/253/handout/smf/)
 
+## Utilisation
+  * make
+  * ./midiparser \{fichierMidi.mid\}
+  * Le programme va alors afficher les tracks en cours d'analyse et aux finales, les notes retrouvés ainsi que leurs durées.
+## Fichier de tests
+	Des fichiers Midi peuvent être trouvés par les liens suivants :
+ - [VgMusic](http://www.vgmusic.com/)
+ - [mididb](http://mididb.com/)
+ - [piano-midi](http://www.piano-midi.de/)
+
+
+
 #Algorithme PrefixSpan
 
 Implémentation en Nit de l'algorithme PrefixSpan
@@ -26,6 +38,17 @@ Inspiré des sites des références :
  - [Librairie SPMF](http://www.philippe-fournier-viger.com/spmf/)
  - [Université Alberta](https://webdocs.cs.ualberta.ca/~zaiane/courses/cmput695-04/slides/PrefixSpan-Wojciech.pdf)
 
+## Utilisation
+  * make
+  * ./prefixspan \{fichierDeDonnes.txt\} datatype minSupport maxSupport
+  * (datatype = 1 pour des Int et datatype = 2 pour des Strings)
+  * minSupport égale le nombre d'occurence minimale pour les patterns à noter.
+  * maxSupport égale la taille maximale d'un pattern possible. Pour n'avoir pas de taille limite, maxSupport = 0.
+  * Le programme va alors afficher les patterns du fichier analysé.
+
+## Fichiers de tests
+  Des fichiers de tests peuvent être trouvés dans le folder Prefix.
+  Attention : Dû à une erreur dans le fonctionnement de la fonction is_num en Nit pour certains caractères, tout fichiers de données String doivent être composés au min de 2 caractères. 
 
 #Algorithme Clustering hiérachique
 

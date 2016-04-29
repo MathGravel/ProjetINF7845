@@ -28,15 +28,6 @@ class Transactions
 
 end
 
-#class TransactionInt
-#	super Transaction
-#	redef type ITEM : Int
-#end
-
-class TransactionFloat
-	super Transaction
-	redef type ITEM: Float
-end
 
 class Transaction
 	super Base
@@ -50,7 +41,11 @@ class Transaction
 
 	fun add(item : ITEM)
 	do
-		table.add item
+		if item isa Int then
+			table.add item.to_i
+		else
+			table.add item
+		end 
 	end
 
 	fun length: Int
@@ -83,7 +78,7 @@ class Transaction
 		var str = "Id {id} ("
 		for i in table
 		do
-			str = str + "i "
+			str = str + "{i} "
 		end
 		str = str + ")"
 		return str

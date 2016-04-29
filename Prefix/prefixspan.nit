@@ -33,19 +33,19 @@ class PrefixSpan
 			line = file.read_line
 			if line.length > 0 then
 				var elems : Array[String] = line.split(' ')
+				print elems
 				if elems.length > 1 then
 					var tr : Transaction
-					if elems[0].is_int then
-						tr = new Transaction(i)
-						i = i + 1
-						for elem in elems
-						do
+					tr = new Transaction(i)
+					i = i + 1
+					for elem in elems
+					do
+						print "elem {elem.is_num}"
+						if elem.is_num then
 							tr.add elem.to_i
+						else
+							tr.add elem
 						end
-
-					else 
-						print "Erreur, ce type n'est pas utilisable"
-						abort
 					end
 					db.addItem(tr,0)
 				end
@@ -61,6 +61,7 @@ class PrefixSpan
 	private fun project(values : Transactions)
 	do
 		if values.length < minSup then return
+		print values
 		var p = new Pair[Array[ITEM],Int](curPattern.clone,values.length)
 		patterns.add p.clone
 		if maxSup > 0 and maxSup == curPattern.length then return
@@ -80,6 +81,7 @@ class PrefixSpan
 
 		end
 		var newSet : Transactions = new Transactions
+		#print mapping.keys
 		for itr in mapping.keys
 		do
 			for ii in [0..values.length-1]
@@ -125,10 +127,29 @@ class PrefixSpanInt
 	redef type ITEM: Int
 end
 
-if args.is_empty then
-	print "Usage: ./prefixspan file"
-	exit(1)
+class PrefixSpanString
+	super PrefixSpan
+	redef type ITEM: String
+
 end
 
-var midi = new PrefixSpanInt(args[0],1,0)
+if args.is_empty or args.length < 4 then
+	print "Usage: ./prefixspan file dataType(Int = 1,String = 2) minSupport=1 maxSupport=0"
+	exit(1)
+end
+var midi : PrefixSpan
+
+if not args[1].is_int and not args[2].is_int or not args[3].is_int then
+	print "Erreur, minSupport et maxSupport doivent être un chiffre"
+	abort
+end
+
+if args[1].to_i == 1 then
+	 midi = new PrefixSpanInt(args[0],args[2].to_i,args[3].to_i)
+else if args[1].to_i == 2 then
+	 midi = new PrefixSpanString(args[0],args[2].to_i,args[3].to_i) 
+else
+	 print "Erreur, ce type n'est pas utilisable."
+	 abort
+end
 print midi.to_s
