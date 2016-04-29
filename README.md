@@ -23,6 +23,7 @@ Inspiré des sites des références :
   * make
   * ./midiparser \{fichierMidi.mid\}
   * Le programme va alors afficher les tracks en cours d'analyse et aux finales, les notes retrouvés ainsi que leurs durées.
+  
 ## Fichier de tests
 	Des fichiers Midi peuvent être trouvés par les liens suivants :
  - [VgMusic](http://www.vgmusic.com/)
